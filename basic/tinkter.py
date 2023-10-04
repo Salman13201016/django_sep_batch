@@ -27,7 +27,7 @@ entry1.pack()
 # entry= Entry(top, width= 40)
 # entry.focus_set()
 # entry.pack()
-def get_value():
+def get_value(rajib):
     global b, e
     b=int(entry.get())
     e=int(entry1.get())
@@ -54,3 +54,4 @@ def get_value():
 B = Button(top, text ="Calculate Grade" , command=get_value)
 B.place(x=400,y=200)
 top.mainloop()
+get_value()

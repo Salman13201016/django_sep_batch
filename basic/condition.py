@@ -1,12 +1,12 @@
-name = "salman"
-phone = "01705644008"
-email = 's'
-size_name = len(name)
-size_phone = len(phone)
-size_email = len(email)
+# name = "salman"
+# phone = "01705644008"
+# email = 's'
+# size_name = len(name)
+# size_phone = len(phone)
+# size_email = len(email)
 
-score = int(input("enter your number:"))
-print(score)
+# score = int(input("enter your number:"))
+# print(score)
 
 # ==, x<y, x>y, x<=y, x>=y
 
@@ -20,5 +20,20 @@ print(score)
 #         print("the phone number size must be minimum 11")
 #     else:
 #         print("success")
+
+# c = float(input('enter a temparature in celcius: '))
+# farenhite = c*9/5+32
+# print(farenhite)
+# number = int(input("enter a number : "))
+# num = number % 2
+# if  num == 0:
+#     print('jor')
+# else:
+#      print('bijor')
+# a = 9
+# b = 3
+# answer = a % b
+
+# print(answer)
 
 
