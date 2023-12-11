@@ -22,4 +22,5 @@ urlpatterns = [
     path('',views.index1),
     path('admin/about',views.about_index,name='about'),
     path('admin/about/insert',views.about_insert,name='about_insert'),
+    path('admin/about/delete/<int:u_id>',views.about_delete,name='delete_about'),
 ]

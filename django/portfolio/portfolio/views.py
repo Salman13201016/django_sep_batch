@@ -1,16 +1,34 @@
-from django.http import HttpResponse
+
 from django.shortcuts import render,redirect
 from .models import About
 
+from django.http import HttpResponse
+
 def about_index(request):
     all_data = About.objects.all()
+    if(len(all_data)>0):
+        size = True
+    else:
+        size = False
 
-    data = {'d':all_data}
+
+    data = {'d':all_data,'size':size}
     
     return render(request,'admin/about.html',data)
 
+def about_delete(request,u_id):
+    about_obj = About.objects.get(id=u_id)
+    about_obj.delete()
+    return redirect('about')
+
+
 def index1(request):
     return render(request,'index.html')
+
+# def about_insert(request):
+#     name = request.POST.get('name')
+#     email = request.POST.get('email')
+#     return HttpResponse("this is a about insert")
 
 def about_insert(request):
     name = request.POST.get('name')
@@ -26,8 +44,11 @@ def about_insert(request):
     image = request.FILES.get('image')
     address = request.POST.get('address')
     desc = request.POST.get('desc')
-    # return HttpResponse(desc)
+
     about_obj = About()
+
+
+
     about_obj.name = name
     about_obj.email = email
     about_obj.phone = phone
