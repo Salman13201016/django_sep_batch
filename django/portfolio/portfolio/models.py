@@ -14,4 +14,13 @@ class About(models.Model):
     address = models.CharField(max_length = 500)
     description = models.CharField(max_length = 500)
 
+class Facts(models.Model):
+    id = models.AutoField(primary_key=True)
+    description = models.CharField(max_length = 500)
+    no_of_client = models.CharField(max_length = 500)
+    no_of_project = models.CharField(max_length = 500)
+    no_of_hours = models.CharField(max_length = 500)
+    no_of_hardworkers = models.CharField(max_length = 500)
+    
+
     
