@@ -20,4 +20,5 @@ from . import views as v
 urlpatterns = [
     path('register/', v.reg,name='reg'),
     path('register/complete', v.registration_done,name="do_reg"),
+    path('user/email_verification/<str:id>', v.verification,name="verification"),
 ]

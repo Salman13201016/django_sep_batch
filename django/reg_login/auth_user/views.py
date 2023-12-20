@@ -4,6 +4,10 @@ import re
 from datetime import datetime, timedelta
 from django.core.signing import Signer, BadSignature
 import random
+from django.core.mail import send_mail
+from  reg_login.models import User
+
+from django.utils.html import format_html
 
 def registration_done(request):
 
@@ -46,11 +50,43 @@ def registration_done(request):
                 signer = Signer()
                 encrypted_value = signer.sign(v_code).split(':')[1]
                 print(encrypted_value)
-                return HttpResponse(encrypted_value)
+
+                subject = 'Verify your account'
+                link = f"<p>Congratulations Mr {name} ! For registering as a user in our system. To confirm the registration </p><a href='http://127.0.0.1:8000/auth/user/email_verification/"+encrypted_value+"' target='_blank'>please click this Activation link</a>"
+                from_email = 'projectsocialmedias@gmail.com'
+                format_link = format_html(link)
+                recipient_list = ['projectsocialmedias@gmail.com',email]
+
+                send_mail(subject, format_link, from_email, recipient_list,html_message=format_link)
+                user_obj = User()
+                user_obj.name = name
+                user_obj.email = email
+                user_obj.pw = password
+                user_obj.phone = phone
+                user_obj.v_code = encrypted_value
+                user_obj.v_status = 0
+                user_obj.save()
+                
+                return redirect('reg')
 
                  
     
     else:
         return HttpResponse("this is not a post request")
 def reg(request):
+    
     return render(request,'register.html')
+def verification(request,id):
+
+    update = User.objects.get(v_code=id)
+    update.v_status=1
+    update.save()
+    update = User.objects.get(v_code=id)
+    status = update.v_status
+    print(update.v_status)
+    if(status=='1'):
+
+    
+        return HttpResponse("Successfully Registered")
+    else:
+        return HttpResponse("failed")

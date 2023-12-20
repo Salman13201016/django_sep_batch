@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'reg_login',
 ]
 
 MIDDLEWARE = [
@@ -75,10 +76,15 @@ WSGI_APPLICATION = 'reg_login.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "django_sep_reg",
+        "USER":"root",
+        "PASSWORD": "",
+        "HOST":"localhost",
+        "PORT":3306
     }
 }
 
@@ -112,6 +118,15 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'projectsocialmedias@gmail.com'
+EMAIL_HOST_PASSWORD = 'yyci bqsi lkoa sdno' # qsxptvezrvvbgfof
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)
