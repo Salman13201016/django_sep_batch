@@ -74,10 +74,13 @@ def registration_done(request):
     else:
         return HttpResponse("this is not a post request")
 def reg(request):
-    
-    return render(request,'register.html')
-def verification(request,id):
+    if 'user_id' in request.session:
+         return redirect('home')
+    else:
 
+    
+        return render(request,'register.html')
+def verification(request,id):
     update = User.objects.get(v_code=id)
     update.v_status=1
     update.save()
@@ -85,8 +88,46 @@ def verification(request,id):
     status = update.v_status
     print(update.v_status)
     if(status=='1'):
-
-    
         return HttpResponse("Successfully Registered")
     else:
         return HttpResponse("failed")
+    
+def home(request):
+    if 'user_id' in request.session:
+
+    
+        return render(request,'home.html')
+    elif 'social_auth_google-oauth2' in request.session:
+        return render(request,'home.html')
+    else:
+        return redirect('login')
+
+def login(request):
+    if 'user_id' in request.session:
+
+        return redirect('home')
+    elif 'social_auth_google-oauth2' in request.session:
+        return redirect('home')
+    
+    return render(request,'login.html')
+
+
+def login_done(request):
+    email = request.POST.get('email')
+    pw = request.POST.get('password')
+    check = User.objects.get(email=email)
+    # print(list(check.id))
+    if(check.v_status=='1' and check.pw==pw):
+        request.session['user_id'] = check.id
+        return redirect('home')
+        
+    else:
+        return HttpResponse("Login Failed")
+    
+def logout(request):
+    if 'user_id' in request.session:
+        request.session.flush()
+    elif 'social_auth_google-oauth2' in request.session:
+        del request.session['social_auth_google-oauth2']
+    return render(request,'login.html')
+    

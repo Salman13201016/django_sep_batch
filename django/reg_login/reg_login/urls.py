@@ -20,4 +20,5 @@ from . import views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('auth_user.urls')),
+    path('social-auth/',include('social_django.urls',namespace='social')),
 ]

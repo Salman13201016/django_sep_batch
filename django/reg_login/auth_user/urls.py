@@ -21,4 +21,8 @@ urlpatterns = [
     path('register/', v.reg,name='reg'),
     path('register/complete', v.registration_done,name="do_reg"),
     path('user/email_verification/<str:id>', v.verification,name="verification"),
+    path('home/', v.home,name='home'),
+    path('login/', v.login,name='login'),
+    path('login/complete', v.login_done,name="do_login"),
+    path('logout', v.logout,name="logout"),
 ]
